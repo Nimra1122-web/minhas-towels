@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 
-html, body {
+html {
     width: 100%;
     overflow-x: hidden;
 }
@@ -913,4 +913,11 @@ h1 {
 
 .carousel-dots .dot.active::before {
   background: #1b4d1b;
+}
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: linear-gradient(135deg, #1b4d1b 0%, #d4af37 100%);
 }
