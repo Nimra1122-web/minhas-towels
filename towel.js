@@ -16,7 +16,45 @@ navLinks.forEach(link => {
     });
 });
 
-// Contact Form Handler with validation
+const slider = document.getElementById('slider');
+        const cards = slider.querySelectorAll('.card');
+        
+        let activeIndex = 1;
+
+        function updateCards() {
+            cards.forEach((card, index) => {
+                card.classList.remove('active', 'near');
+                if (index === activeIndex) {
+                    card.classList.add('active');
+                } else if (index === activeIndex - 1 || index === activeIndex + 1) {
+                    card.classList.add('near');
+                }
+            });
+        }
+
+        function moveSlider() {
+            const cardWidth = cards[0].offsetWidth + 22; // card width + gap
+            const offset = (activeIndex * cardWidth) - (slider.offsetWidth / 2) + (cardWidth / 2);
+            slider.style.transform = `translateX(${-offset}px)`;
+        }
+
+        function nextCard() {
+            activeIndex = (activeIndex + 1) % cards.length;
+            updateCards();
+            moveSlider();
+        }
+
+        function prevCard() {
+            activeIndex = (activeIndex - 1 + cards.length) % cards.length;
+            updateCards();
+            moveSlider();
+        }
+
+        // Auto slide every 3 seconds
+        setInterval(nextCard, 3000);
+        updateCards();
+
+        // Contact Form Handler with validation
 document.getElementById('contactForm').addEventListener('submit', function(event) {
     const userName = document.getElementById('user_name').value.trim();
     const userEmail = document.getElementById('user_email').value.trim();
@@ -270,102 +308,3 @@ document.getElementById('contactForm').addEventListener('submit', function(event
 
 })();
 
-let slideIndex = 1;
-showSlides(slideIndex);
-
-function plusSlides(n) {
-  showSlides(slideIndex += n);
-}
-
-function showSlides(n) {
-  let i;
-  let slides = document.getElementsByClassName("mySlides");
-
-  if (n > slides.length) slideIndex = 1;
-  if (n < 1) slideIndex = slides.length;
-
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-  }
-
-  slides[slideIndex - 1].style.display = "block";
-}
-// Initial display
-
-let startX = 0;
-let endX = 0;
-
-const slider = document.querySelector('.slideshow-container');
-
-// Mouse drag
-slider.addEventListener('mousedown', (e) => {
-  startX = e.clientX;
-});
-
-slider.addEventListener('mouseup', (e) => {
-  endX = e.clientX;
-  handleSwipe();
-});
-
-// Touch (mobile)
-slider.addEventListener('touchstart', (e) => {
-  startX = e.touches[0].clientX;
-});
-
-slider.addEventListener('touchend', (e) => {
-  endX = e.changedTouches[0].clientX;
-  handleSwipe();
-});
-
-function handleSwipe() {
-  let diff = startX - endX;
-
-  if (diff > 50) {
-    plusSlides(1);   // left swipe → next image
-  } else if (diff < -50) {
-    plusSlides(-1);  // right swipe → previous image
-  }
-}
-document.addEventListener("DOMContentLoaded", function () {
-
-  let startX = 0;
-  let endX = 0;
-
-  const slider = document.querySelector('.slideshow-container');
-
-  if (!slider) {
-    console.log("Slider not found");
-    return;
-  }
-
-  // Mouse
-  slider.addEventListener('mousedown', (e) => {
-    startX = e.clientX;
-  });
-
-  slider.addEventListener('mouseup', (e) => {
-    endX = e.clientX;
-    handleSwipe();
-  });
-
-  // Touch (mobile)
-  slider.addEventListener('touchstart', (e) => {
-    startX = e.touches[0].clientX;
-  });
-
-  slider.addEventListener('touchend', (e) => {
-    endX = e.changedTouches[0].clientX;
-    handleSwipe();
-  });
-
-  function handleSwipe() {
-    let diff = startX - endX;
-
-    if (diff > 50) {
-      plusSlides(1);
-    } else if (diff < -50) {
-      plusSlides(-1);
-    }
-  }
-
-});

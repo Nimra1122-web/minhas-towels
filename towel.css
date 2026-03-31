@@ -4,8 +4,9 @@
     box-sizing: border-box;
 }
 
-html {
+html, body {
     width: 100%;
+    height: 100%;
     overflow-x: hidden;
 }
 
@@ -340,8 +341,7 @@ body {
 
 /* Products Section */
 .products {
-    padding: 60px 2rem;
-    max-width: 1200px;
+    padding: 60px 7%;
     margin: 0 auto;
     background: linear-gradient(135deg, #FBF8F3 0%, #F5F0E8 100%);
 }
@@ -390,8 +390,6 @@ body {
     padding: 0 1rem 1.5rem;
     font-size: 0.95rem;
 }
-
-/* About Section */
 .about {
     background: linear-gradient(135deg, #F0F8F6 0%, #E8F5F2 100%);
     padding: 60px 2rem;
@@ -415,113 +413,94 @@ body {
     color: #333;
     margin-bottom: 40px;
 }
-
-.slideshow-container {
-  position: relative;
-  margin:  auto;
+.container {
+    width: 100%;
+    max-width: 800px;
+    margin: 100px auto;
+    overflow: hidden;
+    position: relative;
 }
 
-/* Next & previous buttons */
+    .slider {
+        display: flex;
+        gap: 22px;
+        transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .card {
+        min-width: 140px;
+        height: 250px;
+        background: #333;
+        border-radius: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.5s ease;
+        opacity: 0.4;
+        transform: scale(0.6);
+        filter: blur(2px);
+    }
+
+    /* near cards */
+    .card.near {
+        opacity: 0.7;
+        transform: scale(0.8) scaleX(1.1) scaleY(1.0);
+        filter: blur(1px);
+    }
+
+    /* center card */
+    .card.active {
+        background: linear-gradient(135deg, #9b7edc, #6c5ce7);
+        transform: scaleX(1.24) scaleY(1.0);
+        opacity: 1;
+        filter: blur(0);
+    }
+
+    .card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 12px;
+    }
+    @media (max-width: 768px) {
+    .card {
+        min-width: 120px;
+        height: 250px;
+    }
+
+    .container {
+        margin: 50px auto;
+        max-width: 400px;
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        min-width: 100px;
+        height: 160px;
+    }
+}
+
 .prev, .next {
-  cursor: pointer;
-  position: absolute;
-  top: 0;
-  width: auto;
-  padding: 16px;
-  margin-top: -22px;
-  color: black;
-  font-weight: bold;
-  font-size: 18px;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
-  user-select: none;
-  text-decoration: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 50%;
+    margin-right: 10px;
 }
 
-/* Position the "next button" to the right */
+.prev {
+    left: 10px;
+}
+
 .next {
-  right: 0;
-  border-radius: 3px 0 0 3px;
+    right: 10px;
 }
-
-/* On hover, add a black background color with a little bit see-through */
-
-.prev:hover, .next:hover {
-  background-color: rgba(0,0,0,0.8);
-  color: white;
-}
-/* Fading animation */
-.fade {
-  animation-name: fade;
-  animation-duration: 1.5s;
-}
-
-.mySlides {
-  display: none;
-}
-
-.slideshow-container {
-  max-width: 360px;
-  margin: 0 auto;
-}
-
-.slideshow-container img {
-  width: 100%;
-  height: 260px;          /* SAME HEIGHT FOR ALL */
-  object-fit: cover;     /* IMPORTANT */
-  display: block;
-  border-radius: 8px;
-}
-
-
-.prev, .next {
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.slideshow-container {
-  cursor: grab;
-}
-
-.slideshow-container:active {
-  cursor: grabbing;
-}
-
-
-
-@keyframes fade {
-  from {opacity: .4} 
-  to {opacity: 1}
-}
-
-/* On smaller screens, decrease text size */
-@media only screen and (max-width: 300px) {
-  .prev, .next,.text {font-size: 11px}
-}
-
-
-/* LEFT & RIGHT */
-.prev { left: -48px; }
-.next { right: -48px; }
-
-/* MOBILE */
-@media (max-width: 600px) {
-  .slideshow-container {
-    max-width: 90%;
-  }
-
-  .slideshow-container img {
-    height: 220px;
-  }
-}
-
-@media (max-width: 400px) {
-  .slideshow-container img {
-    height: 200px;
-  }
-}
-/* Features Section */
-/* Testimonials */
 .reviews {
     padding: 60px 2rem;
     max-width: 1200px;
@@ -728,8 +707,7 @@ body {
 
 /* Map Section */
 .map-container {
-    padding: 6px;
-    background:  linear-gradient(135deg, #F5F5F5 0%, #EFEFEF 100%);
+    padding: 6px, linear-gradient(135deg, #F5F5F5 0%, #EFEFEF 100%);
     background-color: #f5f5f5;
     max-width: 1200px;
     margin: 0 auto;
@@ -913,17 +891,4 @@ h1 {
 
 .carousel-dots .dot.active::before {
   background: #1b4d1b;
-}
-
-.navbar {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    background: linear-gradient(135deg, #1b4d1b 0%, #d4af37 100%);
-}
-
-@media (max-width: 768px) {
-    .hero {
-        background-attachment: scroll;
-    }
 }
